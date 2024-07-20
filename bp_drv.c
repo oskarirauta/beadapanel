@@ -45,6 +45,21 @@ static int bp_data_alloc(struct bp_device *bp) {
 
 	iosys_map_set_vaddr(&bp -> screen_base, bp -> data);
 
+	// TODO: not good for variable length format string.. strcmp?
+
+	unsigned char status_cmd[20] = {
+		'S', 'T', 'A', 'T', 'U', 'S', '-', 'L', 'I', 'N', 'K',
+		1, 0, 0, 0, 0, 0, 0, 0, 0
+	};
+
+	unsigned char cmd[270] = {
+		'P', 'A', 'N', 'E', 'L', '-', 'L', 'I', 'N', 'K',
+		3, 1,
+		'v', 'i', 'd', 'e', 'o','/', 'x', '-', 'r', 'a', 'w', ',', ' ',
+		'f', 'o', 'r', 'm', 'a', 't', '=', 'R', 'G', 'B', '1', '6', ',',
+		'w', 'i', 'd', 't', 'h', '=',
+	};
+
 	// TODO:
 	// prepare cmd and status_cmd by clearing and filling with static content (ascii string panel-link and status-link)
 
